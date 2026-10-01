@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Watermelon Merge Game</title>
+
+    <!-- PWA Settings -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2c3e50">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+
+    <link rel="stylesheet" href="style.css">
+    <!-- Matter.js Physics Engine -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+</head>
+<body>
+    <div id="game-container">
+        <!-- คะแนน -->
+        <div id="score-board">SCORE: <span id="score">0</span></div>
+        
+        <!-- เส้นเตือนระดับสูงสุด -->
+        <div id="warning-overlay"></div>
+
+        <!-- หน้าจอจบเกม -->
+        <div id="end-screen" class="modal">
+            <h1 id="end-title">GAME OVER</h1>
+            <p>Score: <span id="final-score">0</span></p>
+            <button onclick="restartGame()">PLAY AGAIN</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+    <!-- Register Service Worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then((reg) => console.log('Service Worker registered:', reg.scope))
+                    .catch((err) => console.error('Service Worker registration failed:', err));
+            });
+        }
+    </script>
+</body>
+</html>
